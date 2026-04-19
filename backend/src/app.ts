@@ -1,5 +1,4 @@
-import dotenv from 'dotenv';
-
+import 'dotenv/config';
 import express from 'express';
 import mongoose from 'mongoose';
 import cookieParser from 'cookie-parser';
@@ -9,7 +8,6 @@ import errorHandler from './middlewares/error-handler';
 import { DB_ADDRESS, FRONTEND_URL_HTTPS, FRONTEND_URL_HTTP } from './config';
 import routes from './routes';
 
-dotenv.config({ path: [`${__dirname}/../.env`, `${__dirname}/../.env.deploy`] });
 const { PORT = 3000 } = process.env;
 const app = express();
 mongoose.connect(DB_ADDRESS);

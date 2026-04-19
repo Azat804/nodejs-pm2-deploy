@@ -1,3 +1,4 @@
+import 'dotenv/config';
 
 const getResponse = (res) => {
     return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`);
@@ -149,6 +150,7 @@ class Api {
   }
   }
   // Замените на адрес вашего бэкенда
-  const api = new Api('https://api.mestoapp.students.nomorepartiessite.ru');
+  const {BACKEND_URL} = process.env;
+  const api = new Api(BACKEND_URL);
 
   export default api;
