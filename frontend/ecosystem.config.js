@@ -8,7 +8,6 @@ module.exports = {
   apps: [{
     name: 'frontend-service',
     script: './src/index.js',
-    autorestart: false
   }],
 
   // Настройка деплоя
