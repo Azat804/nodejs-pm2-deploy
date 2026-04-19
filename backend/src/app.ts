@@ -6,7 +6,7 @@ import cookieParser from 'cookie-parser';
 import { errors } from 'celebrate';
 import cors from 'cors';
 import errorHandler from './middlewares/error-handler';
-import { DB_ADDRESS, FRONTEND_URL } from './config';
+import { DB_ADDRESS, FRONTEND_URL_HTTPS, FRONTEND_URL_HTTP } from './config';
 import routes from './routes';
 
 dotenv.config({ path: [`${__dirname}/../.env`, `${__dirname}/../.env.deploy`] });
@@ -16,7 +16,7 @@ mongoose.connect(DB_ADDRESS);
 
 // Только для локальных тестов. Не используйте это в продакшене
 app.use(cors({
-  origin: FRONTEND_URL as string,
+  origin: [FRONTEND_URL_HTTP, FRONTEND_URL_HTTPS],
   credentials: true,
 }));
 app.use(express.json());
