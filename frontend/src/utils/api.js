@@ -7,28 +7,30 @@ class Api {
     constructor(address) {
       this._address = address;
     }
-  
+
     setToken(token) {
       this._token = token;
     }
-  
-  
+
+
     getAppInfo() {
       return Promise.all([this.getCardList(), this.getUserInfo()]);
     }
-  
+
     getCardList() {
       return fetch(`${this._address}/cards`, {
+        credentials: 'include',
         headers: {
           'Authorization': `Bearer ${this._token}`,
         },
       })
       .then(getResponse)
     }
-  
+
     addCard({ name, link }) {
       return fetch(`${this._address}/cards`, {
         method: 'POST',
+        credentials: 'include',
         headers: {
           'Authorization': `Bearer ${this._token}`,
           'Content-Type': 'application/json',
@@ -40,19 +42,21 @@ class Api {
       })
       .then(getResponse)
     }
-  
+
     removeCard(cardId) {
       return fetch(`${this._address}/cards/${cardId}`, {
         method: 'DELETE',
+        credentials: 'include',
         headers: {
           'Authorization': `Bearer ${this._token}`,
           'Content-Type': 'application/json',
         },
       }).then(getResponse)
     }
-  
+
     getUserInfo() {
       return fetch(`${this._address}/users/me`, {
+        credentials: 'include',
         headers: {
           'Authorization': `Bearer ${this._token}`,
           'Content-Type': 'application/json',
@@ -60,10 +64,11 @@ class Api {
       })
       .then(getResponse)
     }
-  
+
     setUserInfo({ name, about }) {
       return fetch(`${this._address}/users/me`, {
         method: 'PATCH',
+        credentials: 'include',
         headers: {
           'Authorization': `Bearer ${this._token}`,
           'Content-Type': 'application/json',
@@ -75,10 +80,11 @@ class Api {
       })
         .then(getResponse);
     }
-  
+
     setUserAvatar({ avatar }) {
       return fetch(`${this._address}/users/me/avatar`, {
         method: 'PATCH',
+        credentials: 'include',
         headers: {
           'Authorization': `Bearer ${this._token}`,
           'Content-Type': 'application/json',
@@ -88,21 +94,23 @@ class Api {
         }),
       }).then(getResponse)
     }
-  
+
     changeLikeCardStatus(cardId, like) {
-      
+
       return fetch(`${this._address}/cards/${cardId}/likes`, {
         method: like ? 'PUT' : 'DELETE',
+        credentials: 'include',
         headers: {
           'Authorization': `Bearer ${this._token}`,
           'Content-Type': 'application/json',
         },
       }).then(getResponse)
     }
-  
+
     register(email, password) {
       return fetch(`${this._address}/signup`, {
         method: 'POST',
+        credentials: 'include',
         headers: {
           'Content-Type': 'application/json'
         },
@@ -110,10 +118,11 @@ class Api {
       })
       .then(getResponse)
     }
-  
+
     login(email, password) {
       return fetch(`${this._address}/signin`, {
         method: 'POST',
+        credentials: 'include',
         headers: {
           'Content-Type': 'application/json'
         },
@@ -126,10 +135,11 @@ class Api {
         return data;
       })
     }
-  
+
     checkToken(token) {
       return fetch(`${this._address}/users/me`, {
         method: 'GET',
+        credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`,
@@ -140,6 +150,5 @@ class Api {
   }
   // Замените на адрес вашего бэкенда
   const api = new Api('http://localhost:3000');
-  
+
   export default api;
-  
