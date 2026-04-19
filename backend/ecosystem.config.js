@@ -7,7 +7,7 @@ const {
 module.exports = {
   apps: [{
     name: 'api-service',
-    script: './backend/src/app.ts',
+    script: './src/app.ts',
   }],
 
   // Настройка деплоя
@@ -19,7 +19,7 @@ module.exports = {
       repo: DEPLOY_REPOSITORY,
       path: DEPLOY_PATH,
       'pre-deploy-local': `scp  ./.env* ${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_PATH}/source/backend`,
-      'post-deploy': 'cd ./backend && npm install && npm run build',
+      'post-deploy': 'cd ./backend && npm install && npm run build && pm2 start ecosystem.config.js',
     },
   },
 };
