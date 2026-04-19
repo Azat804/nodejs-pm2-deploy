@@ -7,7 +7,7 @@ const {
 module.exports = {
   apps: [{
     name: 'api-service',
-    script: './src/app.ts',
+    script: './backend/src/app.ts',
   }],
 
   // Настройка деплоя
